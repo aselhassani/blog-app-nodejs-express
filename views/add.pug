@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  p Nouvau post
+  form(action='/' method='POST')
+    label Titre
+    input(type='text' name='title' placeholder='Titre' value='')
+    label Auteur
+    input(type='text' name='author' placeholder='Auteur' value='')
+    label R&eacute;sum&eacute;
+    textarea(name='summary' rows='2')
+    label Contenu -HTML- 
+    textarea(name='content' rows='12')
+    input(type='submit' value='Add Post')
