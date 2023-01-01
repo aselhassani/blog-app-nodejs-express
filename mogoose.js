@@ -17,21 +17,33 @@ async function connect() {
   await mongoose.connect('mongodb://127.0.0.1:27017/test')
 }
 
-const saveArticle = (article) => {
-  connect()
-  const articleEntity = new Article({ ...article})
-  console.log("Saving article in mongodb", articleEntity)
-  articleEntity.save()
-  mongoose.disconnect()
+const savePost = async (article) => {
+  await connect()
+  if (article._id == null || article._id == '') {
+    const articleEntity = new Article({ title:article.title, author:article.author, summary:article.summary, content:article.content})
+    console.log("creating new post", articleEntity)
+    await articleEntity.save()
+  } else {
+    await Article.findOneAndUpdate({_id:article._id}, article, {
+      new: true
+    });
+  }
 }
 
-const findAllArticles = () => {
-  connect()
-  return Article.find()
+const findAllPosts = async () => {
+  await connect()
+  connect().catch(err => console.log(err))
+  return await Article.find()
 }
 
-const disconnect = () => {
-  mongoose.disconnect()
+const findPostById = async (id) => {
+  await connect()
+  connect().catch(err => console.log(err))
+  return await Article.findById(id)
 }
 
-module.exports = {saveArticle, findAllArticles, disconnect};
+async function disconnect() {
+  await mongoose.disconnect()
+}
+
+module.exports = {savePost, findAllPosts, findPostById, disconnect};

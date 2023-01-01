@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .blank
+  .home
+    a(href='/posts')
+      i.icon-home 
+  section
+  .titre
+    | #{article.title}
+    .cmd
+      a(href='/posts/edit/'+ article._id)
+        i.icon-edit  
+      a(href='/posts/delete/'+ article._id)
+        i.icon-trash
+  .auteur Auteur: #{article.author}  
+  .date
+    | date de cr&eacute;ation: #{article.createdAt}
+  .date
+    | date de Modification: #{article.updatedAt}
+  .resume
+    p R&eacute;sum&eacute;
+    span #{article.summary}
+  .content
+    p Contenu
+    span
+      | #{article.content}
+

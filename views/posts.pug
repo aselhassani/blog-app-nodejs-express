@@ -1,15 +1,22 @@
 extends layout
 
 block content
+  .blank
+  .add
+    a(href='/posts/edit')
+      i.icon-plus-sign
+  .home
+    a(href='/posts')
+      i.icon-home  
   ul
   each article in articles
     section
       .titre
         | #{article.title}
         .cmd
-          a(href='/posts/edit/6383dc1fe416171f7ee71c5a')
+          a(href='/posts/edit/' + article._id)
             i.icon-edit  
-          a(onclick="alert('Impossible de  supprimer ce post. ') " hreef='/posts/delete/6383dc1fe416171f7ee71c5a')
+          a(onclick="alert('Impossible de  supprimer ce post. ') " hreef='/posts/delete/'+ article._id)
             i.icon-trash
       .auteur Auteur: #{article.author} 
       .date
@@ -19,4 +26,4 @@ block content
       .resume
         p R&eacute;sum&eacute;
         span #{article.summary} ...
-        a(href='/posts/6383dc1fe416171f7ee71c5a') Lire plus
+        a(href='/posts/' + article._id) Lire plus
