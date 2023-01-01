@@ -1,14 +1,19 @@
 extends layout
 
 block content
+  .blank
+  .home
+    a(href='/posts')
+      i.icon-home 
   p Nouvau post
-  form(action='/' method='POST')
+  form(action='/posts' method='POST')
     label Titre
-    input(type='text' name='title' placeholder='Titre' value='')
+    input(type='hidden' name='_id' value=article._id)
+    input(type='text' name='title' placeholder='Titre' value=article.title)
     label Auteur
-    input(type='text' name='author' placeholder='Auteur' value='')
+    input(type='text' name='author' placeholder='Auteur' value=article.author)
     label R&eacute;sum&eacute;
-    textarea(name='summary' rows='2')
+    textarea(name='summary' rows='2') #{article.summary}
     label Contenu -HTML- 
-    textarea(name='content' rows='12')
-    input(type='submit' value='Add Post')
+    textarea(name='content' rows='12') #{article.content}
+    input(type='submit' value='Sauver')
